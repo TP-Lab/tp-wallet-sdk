@@ -72,8 +72,8 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
     expired	string   // 二维码过期时间，unix时间戳
     callbackUrl string //回调url，通过此url将txId和actionId通过post请求告诉dappServer
 
-   compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
-   compress  number //对协议内容压缩方式 0 表示不压缩 其他待定
+    compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
+    compress  number //对协议内容压缩方式 0 表示不压缩 其他待定
 }
 ~~~
 
