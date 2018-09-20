@@ -78,18 +78,16 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
 }
 ~~~
 
-~~~
 ### 拉起TokenPocket转账
 - 拉起TokenPocket转账和扫扫码转账相比，多了callbackSchema字段，用于回调通知Dapp操作结果。其他字段一样
 - 协议格式
 ~~~
-
     ...
     callbackSchema    string // Dapp自定义回调schema，例如：appABC://abc.com?action=transfer 返回结果为：appABC://abc.com?action=transfer&result=0&txID=xxx result的值为：0为用户取消，1为成功,  2为失败
     ...
-
 ~~~
-使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
+
+- 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
 - 其他过程和扫码类似
 
 ### TokenPocket扫码执行合约
@@ -112,7 +110,6 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
     callbackUrl string //回调url，例如：https://abc.com?action=pushTransaction&qrcID=123，则回调结果为：
 https://abc.com?action=pushTransaction&qrcID=123&result=0&txID=xxx
 其中result（0为用户取消，1为成功,  2为失败）txID为执行成功的transactionHash 
-
    compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
    compress  number //对协议内容压缩方式 0 表示不压缩 其他待定
 ~~~
@@ -121,11 +118,9 @@ https://abc.com?action=pushTransaction&qrcID=123&result=0&txID=xxx
 Dapp 拉起TokenPocket 执行合约操作，和扫码执行合约操作相比，多了callbackSchema字段，用于通知Dapp操作结果，其他字段一样
 - 协议格式
 ~~~
-
     ...
     callbackSchema    string     // Dapp自定义回调schema，例如：appABC://abc.com?action=pushTransaction 返回结果为：appABC://abc.com?action=pushTransaction&result=0&txID=xxx result的值为：0为用户取消，1为成功,  2为失败
     ...
-
 ~~~
 
 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
