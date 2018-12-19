@@ -20,8 +20,6 @@ TP钱包扫描二维码，本地授权登陆，通知Dapp，完成登陆过程
     callbackUrl string   // dapp server上用于接受登录验证信息的url
     expired	    string   //二维码过期时间，时间为秒
     memo	    string   // 登录备注信息，钱包用来展示，可选
-    compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
-    compress    number   //0 代表不压缩，其他待定
 }
 ~~~
 
@@ -46,6 +44,29 @@ sign = ecc.sign(data, privateKey)
 ~~~
 
 - DAPP验证登陆信息
+
+### 拉起TokenPocket授权登陆
+如果dapp没有登陆服务器，只需要拉起钱包获取相关账户信息，则不需要callbackUrl
+- 拉起TokenPocket转账和扫扫码转账相比，多了callbackSchema字段，用于回调通知Dapp操作结果。其他字段一样
+- 协议格式
+~~~
+    ...
+    callbackSchema    string // Dapp自定义回调schema，例如：appABC://abc.com?action=login 返回结果为：appABC://abc.com?action=login&result=1&param={json param} result的值为：0为用户取消，1为成功,  2为失败
+    ...
+~~~
+
+##### 拉起TokenPocket授权登陆返回信息json格式如下
+~~~
+{
+   "wallet": "eoseoseosacc",
+   "publickey": "EOS2TtWv19a9eYEQYB8NbGCM28nQNngWP4UcSjVYqtEz6kF7yCnPX",
+   "permissions": ["active", "owner"],
+   "result": 1
+}
+~~~
+
+- 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
+- 其他过程和扫码类似
 
 ### TokenPocket扫码转账
 TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮询支付结果
@@ -73,8 +94,6 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
     callbackUrl string //回调url，例如：https://abc.com?action=transfer&qrcID=123，则回调结果为：
        https://abc.com?action=transfer&qrcID=123&result=0&txID=xxx
        其中result（0为用户取消，1为成功,2为失败）txID为执行成功的transactionHash
-    compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
-    compress  number //对协议内容压缩方式 0 表示不压缩 其他待定
 }
 ~~~
 
@@ -83,9 +102,20 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
 - 协议格式
 ~~~
     ...
-    callbackSchema    string // Dapp自定义回调schema，例如：appABC://abc.com?action=transfer 返回结果为：appABC://abc.com?action=transfer&result=0&txID=xxx result的值为：0为用户取消，1为成功,  2为失败
+    callbackSchema    string // Dapp自定义回调schema，例如：appABC://abc.com?action=transfer 返回结果为：appABC://abc.com?action=transfer&result=0&txID=xxx&param={json param} result的值为：0为用户取消，1为成功,  2为失败
     ...
 ~~~
+
+转账完成后返回的json param格式如下
+~~~
+"ref": "TokenPocket",
+"txid": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
+"publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
+"wallet": "eoseoseostes",
+"permissions": ["active", "owner"],
+"result": 1
+~~~
+
 
 - 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
 - 其他过程和扫码类似
@@ -110,8 +140,6 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
     callbackUrl string //回调url，例如：https://abc.com?action=pushTransaction&qrcID=123，则回调结果为：
 https://abc.com?action=pushTransaction&qrcID=123&result=0&txID=xxx
 其中result（0为用户取消，1为成功,  2为失败）txID为执行成功的transactionHash 
-   compressedData string //压缩后的协议内容，如果使用了压缩算法，则该字段表示整个json字符串压缩后的内容，如果没有压缩，该字段可以为空
-   compress  number //对协议内容压缩方式 0 表示不压缩 其他待定
 ~~~
 
 ### 拉起TokenPocket 执行合约
@@ -119,8 +147,19 @@ Dapp 拉起TokenPocket 执行合约操作，和扫码执行合约操作相比，
 - 协议格式
 ~~~
     ...
-    callbackSchema    string     // Dapp自定义回调schema，例如：appABC://abc.com?action=pushTransaction 返回结果为：appABC://abc.com?action=pushTransaction&result=0&txID=xxx result的值为：0为用户取消，1为成功,  2为失败
+    callbackSchema    string     // Dapp自定义回调schema，例如：appABC://abc.com?action=pushTransaction 返回结果为：appABC://abc.com?action=pushTransaction&result=0&txID=xxx&param={json param} result的值为：0为用户取消，1为成功,  2为失败
     ...
+~~~
+
+
+合约执行完成后返回的json param格式如下
+~~~
+"ref": "TokenPocket",
+"txid": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
+"publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
+"wallet": "eoseoseostes",
+"permissions": ["active", "owner"],
+"result": 1
 ~~~
 
 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
