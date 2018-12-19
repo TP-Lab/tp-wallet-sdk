@@ -113,6 +113,8 @@ TP钱包扫描二维码，完成转账操作，钱包将txID告诉Dapp，Dapp轮
 "ref": "TokenPocket",
 "txID": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
 "publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
+"action":"transfer",
+"actionId":"ljsdljf-xljlsdjfl" //由dapp传递过来的actionId
 "wallet": "eoseoseostes",
 "permissions": ["active", "owner"],
 "result": 1
@@ -159,6 +161,8 @@ Dapp 拉起TokenPocket 执行合约操作，和扫码执行合约操作相比，
 "ref": "TokenPocket",
 "txID": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
 "publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
+"action":"pushTransaction",
+"actionId":"ljsdljf-xljlsdjfl" //由dapp传递过来的actionId
 "wallet": "eoseoseostes",
 "permissions": ["active", "owner"],
 "result": 1
