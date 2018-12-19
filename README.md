@@ -58,7 +58,9 @@ sign = ecc.sign(data, privateKey)
 拉起TokenPocket授权登陆返回信息json param格式如下
 ~~~
 {
-   "wallet": "eoseoseosacc",
+   "wallet": "eoseoseosacc", //如果是eos系列，则为账户名
+   "action":"login",
+   "actionId":"ljsdjljdljf-xjlsdjfkj" //dapp传递过来的actionId
    "publickey": "EOS2TtWv19a9eYEQYB8NbGCM28nQNngWP4UcSjVYqtEz6kF7yCnPX",
    "permissions": ["active", "owner"],
    "result": 1
