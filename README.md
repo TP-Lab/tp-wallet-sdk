@@ -55,7 +55,7 @@ sign = ecc.sign(data, privateKey)
     ...
 ~~~
 
-##### 拉起TokenPocket授权登陆返回信息json格式如下
+拉起TokenPocket授权登陆返回信息json param格式如下
 ~~~
 {
    "wallet": "eoseoseosacc",
