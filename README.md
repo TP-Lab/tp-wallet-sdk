@@ -69,7 +69,7 @@ sign = ecc.sign(data, privateKey)
 - 其他过程和扫码类似
 
 ### TokenPocket扫码转账
-TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮询支付结果
+TP钱包扫描二维码，完成转账操作，钱包将txID告诉Dapp，Dapp轮询支付结果
 
 - 转账二维码协议
 ~~~
@@ -109,7 +109,7 @@ TP钱包扫描二维码，完成转账操作，钱包将txId告诉Dapp，Dapp轮
 转账完成后返回的json param格式如下
 ~~~
 "ref": "TokenPocket",
-"txid": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
+"txID": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
 "publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
 "wallet": "eoseoseostes",
 "permissions": ["active", "owner"],
@@ -155,7 +155,7 @@ Dapp 拉起TokenPocket 执行合约操作，和扫码执行合约操作相比，
 合约执行完成后返回的json param格式如下
 ~~~
 "ref": "TokenPocket",
-"txid": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
+"txID": "588c6797534d09e8e0b149c06c11bfd6ca7b96f0d4bba87700fffe7a87b0d988",
 "publickey": "EOSX1tWv19a9eKEQQB8Nb2wM28nYNngWP3UcSjVYqtjz6kF7yCnQ",
 "wallet": "eoseoseostes",
 "permissions": ["active", "owner"],
