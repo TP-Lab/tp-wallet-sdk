@@ -55,15 +55,27 @@ sign = ecc.sign(data, privateKey)
     ...
 ~~~
 
-拉起TokenPocket授权登陆返回信息json param格式如下
+拉起TokenPocket授权登陆成功返回信息json param格式如下
 ~~~
 {
+   "sign": "SIG_K1_KZL9eR4cCQCJHpYHbh44yGrDqu4w8hHzQwb1xTk4Mcd4czqpw4jJUgg9DnWXzE3r",
+   "timestamp": "1546613919", //单位是秒
    "wallet": "eoseoseosacc", //如果是eos系列，则为账户名
+   "ref": "TokenPocket",
    "action":"login",
    "actionId":"ljsdjljdljf-xjlsdjfkj" //dapp传递过来的actionId
    "publickey": "EOS2TtWv19a9eYEQYB8NbGCM28nQNngWP4UcSjVYqtEz6kF7yCnPX",
    "permissions": ["active", "owner"],
    "result": 1
+}
+~~~
+
+拉起TokenPocket授权登陆取消操作返回信息json param格式如下
+~~~
+{
+   "action":"login",
+   "actionId":"ljsdjljdljf-xjlsdjfkj" //dapp传递过来的actionId
+   "result": 0
 }
 ~~~
 
@@ -92,7 +104,7 @@ TP钱包扫描二维码，完成转账操作，钱包将txID告诉Dapp，Dapp轮
     memo        string   // 由dapp生成的业务参数信息，需要钱包在转账时附加在memo中发出去，格式为:k1=v1&k2=v2，可选
 			     // 钱包转账时还可附加ref参数标明来源，如：k1=v1&k2=v2&ref=walletname
     desc	    string   // 交易的说明信息，钱包在付款UI展示给用户，最长不要超过128个字节，可选			     
-    expired	    string   // 二维码过期时间，unix时间戳
+    expired	    string   // 二维码过期时间，单位是秒
     callbackUrl string //回调url，例如：https://abc.com?action=transfer&qrcID=123，则回调结果为：
        https://abc.com?action=transfer&qrcID=123&result=0&txID=xxx
        其中result（0为用户取消，1为成功,2为失败）txID为执行成功的transactionHash
@@ -120,6 +132,13 @@ TP钱包扫描二维码，完成转账操作，钱包将txID告诉Dapp，Dapp轮
 "result": 1
 ~~~
 
+转账取消返回的json param格式如下
+~~~
+"action":"transfer",
+"actionId":"ljsdljf-xljlsdjfl" //由dapp传递过来的actionId
+"result": 0
+~~~
+
 
 - 使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
 - 其他过程和扫码类似
@@ -140,7 +159,7 @@ TP钱包扫描二维码，完成转账操作，钱包将txID告诉Dapp，Dapp轮
     memo    string   // 由dapp生成的业务参数信息，需要钱包在转账时附加在memo中发出去，格式为:k1=v1&k2=v2，可选
 			     // 钱包转账时还可附加ref参数标明来源，如：k1=v1&k2=v2&ref=walletname
     desc	    string   // 交易的说明信息，钱包在付款UI展示给用户，最长不要超过128个字节，可选			     
-    expired	    number   // 二维码过期时间，unix时间戳
+    expired	    number   // 二维码过期时间，单位是秒
     callbackUrl string //回调url，例如：https://abc.com?action=pushTransaction&qrcID=123，则回调结果为：
 https://abc.com?action=pushTransaction&qrcID=123&result=0&txID=xxx
 其中result（0为用户取消，1为成功,  2为失败）txID为执行成功的transactionHash 
@@ -168,6 +187,13 @@ Dapp 拉起TokenPocket 执行合约操作，和扫码执行合约操作相比，
 "result": 1
 ~~~
 
-使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可
+取消执行合约返回的json param格式如下
+~~~
+"action":"pushTransaction",
+"actionId":"ljsdljf-xljlsdjfl" //由dapp传递过来的actionId
+"result": 0
+~~~
+
+使用TokenPocket SDK，Dapp不需要传递callbackSchema字段以及处理相关操作，只需要调用SDK相关方法即可。SDK调用取消操作不需要返回相应的数据
 
 sdk详情请见：https://github.com/TP-Lab/Mobile-SDK
