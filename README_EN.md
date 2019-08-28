@@ -1,9 +1,9 @@
 # TokenPocket SDK Wallet Protocol
 #### Version：v1.0
 
-### TokenPocket scan qrcode login
+### TokenPocket scan qrcode authorize
 
-Use TokenPocket scan login qrcode, user auth this action and notify Dapp
+Use TokenPocket scan authorize qrcode, user auth this action and notify Dapp
 
 ~~~
 {
@@ -43,8 +43,8 @@ sign = ecc.sign(data, privateKey)
 
 - DAPP server verify the message
 
-### Pull up TokenPocket auth login
-If the dapp does not have a login server, callbackUrl can be empty
+### Pull up TokenPocket auth authorize
+If the dapp does not have a authorize server, callbackUrl can be empty
 - Compared with scan qrcode,the callbackSchema field is neccessary to get result
 
 ~~~
