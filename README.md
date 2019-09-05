@@ -1,6 +1,6 @@
 # TP接入文档
 
-#### 版本：v1.0，支持EOS,BOS，IOST
+#### 版本：v1.0，支持 EOS,BOS,IOST
 
 ### TokenPocket扫码登陆
 
