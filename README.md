@@ -69,7 +69,7 @@
 ### 通用操作
 - 协议格式
 ~~~
-     protocol    string  // 协议名，钱包用来区分不同协议，本协议为 TokenPocket
+    protocol    string  // 协议名，钱包用来区分不同协议，本协议为 TokenPocket
     version     string   // 协议版本信息，如2.0
     dappName    string   // dapp名字，用于在钱包APP中展示，可选
     dappIcon    string   // dapp图标Url，用于在钱包APP中展示，可选
