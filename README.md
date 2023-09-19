@@ -85,5 +85,7 @@
     callbackUrl string   // dapp server 用于接收操作结果，如果是deeplink或者扫二维码方式拉起钱包操作，想要接收到操作结果，该字段必须提供
 
 ~~~
+注意：TxData字段取值请参考[示例](https://github.com/TP-Lab/tp-wallet-sdk/blob/master/TxData%20Example.md)
 
+<p></p>
 sdk详情请见：https://github.com/TP-Lab/Mobile-SDK
