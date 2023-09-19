@@ -78,7 +78,7 @@
 
     callbackUrl string   // provided by dapp server to get result
 ~~~
-
+About "txData": [DEMO](https://github.com/TP-Lab/tp-wallet-sdk/blob/master/TxData%20Example.md)
 
 
 
